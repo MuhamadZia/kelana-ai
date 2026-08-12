@@ -1,13 +1,20 @@
-def print_trip_summary(destination, days, budget, travel_style, cost):
+def print_trip_summary(destination, country, days, budget, currency, travel_month):
     print("========================")
     print("KelanaAI")
     print("========================")
     print(f"Destination : {destination}")
+    print(f"Country     : {country}")
     print(f"Days        : {days}")
     print(f"Budget      : {budget}")
-    print(f"Style       : {travel_style}")
-    print(f"Cost        : {cost}")
+    print(f"Currency    : {currency}")
+    print(f"Travel Month: {travel_month}")
 
 # Call it with any trip
-print_trip_summary("Japan", 5, 1500, "Family", 100)
-print_trip_summary("Bali", 3, 800, "Backpacker", 100)
+destination = input("destination    : ")
+country = input("country    : ")
+days = int(input("days    : "))
+budget = float(input("budget    : "))
+currency = input("currency    : ")
+travel_month = input("travel month    : ")
+
+print_trip_summary(destination, country, days, budget, currency, travel_month)
