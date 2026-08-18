@@ -21,7 +21,7 @@ def get_recommendations():
   }
 
 # Get transportaions
-@app.get("/api/v1/transportaions")
+@app.get("/api/v1/transportations")
 def get_transportaitons():
   return {
     "transportaions": option_transportations()
