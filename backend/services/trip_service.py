@@ -24,3 +24,10 @@ def recommend_places() -> list[str]:
         "Shibuya",
         "Mount Fuji"
     ]
+
+def option_transportations() -> list[str]:
+    return [
+        "Bus",
+        "Train",
+        "Flight"
+    ]
