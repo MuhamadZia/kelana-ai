@@ -21,10 +21,7 @@ ITINERARY_PROMPT = (
     "(e.g. museums, temples, markets, traditional crafts, or local neighbourhoods).\n"
     "- **Evening**: Suggest dinner spots that fit the budget and travel style, "
     "plus nightlife or evening entertainment options.\n\n"
-    "Format your response in Markdown. "
-    "Use ## for each day (e.g. ## Day 1) and ### for Morning, Afternoon, and Evening sections. "
-    "Use bullet points for activities and tips, "
-    "and **bold** for important details such as place names, estimated costs, and meal suggestions."
+    "Format your response in Markdown format. "
 )
 
 
