@@ -1,26 +1,64 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --cream:   #f5f0e8;
+  --maroon:  #4a1030;
+  --orange:  #e8541e;
+  --maroon-light: #7a2050;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-cream:         var(--cream);
+  --color-maroon:        var(--maroon);
+  --color-maroon-light:  var(--maroon-light);
+  --color-orange:        var(--orange);
+  --font-serif:          var(--font-playfair);
+  --font-sans:           var(--font-inter);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--cream);
+  color: var(--maroon);
+  font-family: var(--font-inter), sans-serif;
+}
+
+/* Markdown result styles */
+.markdown-body h2 {
+  font-family: var(--font-playfair), serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--maroon);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid var(--orange);
+}
+
+.markdown-body h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--orange);
+  margin-top: 1rem;
+  margin-bottom: 0.35rem;
+}
+
+.markdown-body ul {
+  list-style-type: disc;
+  padding-left: 1.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.markdown-body li {
+  margin-bottom: 0.3rem;
+  line-height: 1.65;
+}
+
+.markdown-body strong {
+  color: var(--maroon);
+  font-weight: 700;
+}
+
+.markdown-body p {
+  margin-bottom: 0.6rem;
+  line-height: 1.7;
 }
