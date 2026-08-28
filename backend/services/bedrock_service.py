@@ -14,6 +14,7 @@ MODEL_ID         = os.getenv("MODEL_ID", "amazon.nova-lite-v1:0")
 ITINERARY_PROMPT = (
     "You are an experienced travel planner. "
     "Plan a {days}-day itinerary for {destination}.\n"
+    "Travel Style: USD {travel_style}\n"
     "Budget: USD {budget}\n\n"
     "For each day, structure the plan into three sections:\n"
     "- **Morning**: Provide exactly 2-3 specific morning activities with brief descriptions.\n"
@@ -47,6 +48,7 @@ def get_ai_recommendation(
     destination: str,
     days: int,
     budget: float,
+    travel_style: str, 
 ) -> str:
     """
     Send a travel-planning prompt to AWS Bedrock and return the model's response.
@@ -67,6 +69,7 @@ def get_ai_recommendation(
         days=days,
         destination=destination,
         budget=budget,
+        travel_style=travel_style
     )
 
     client = get_bedrock_client()

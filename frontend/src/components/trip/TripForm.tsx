@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-
-const TRAVEL_STYLES = ["Adventure", "Cultural", "Relaxed", "Luxury", "Budget", "Family"];
+import { TRAVEL_STYLES, type TravelStyle } from "@/constants/travelStyles";
+import { createTrip, generateRecommendation } from "@/services/tripService";
 
 interface TripFormProps {
   onResult: (tripId: number, recommendation: string) => void;
@@ -12,11 +12,9 @@ export default function TripForm({ onResult }: TripFormProps) {
   const [destination, setDestination] = useState("");
   const [days, setDays] = useState("");
   const [budget, setBudget] = useState("");
-  const [travelStyle, setTravelStyle] = useState(TRAVEL_STYLES[0]);
+  const [travelStyle, setTravelStyle] = useState<TravelStyle>(TRAVEL_STYLES[0]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -24,42 +22,22 @@ export default function TripForm({ onResult }: TripFormProps) {
     setLoading(true);
 
     try {
-      // Step 1 — create the trip
-      const createRes = await fetch(`${API_URL}/api/v1/trips`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          destination,
-          days: Number(days),
-          budget: Number(budget),
-        }),
+      // Step 1 — create the trip record
+      const trip = await createTrip({
+        destination,
+        days: Number(days),
+        budget: Number(budget),
+        travel_style: travelStyle,
       });
-
-      if (!createRes.ok) {
-        const err = await createRes.json();
-        throw new Error(err.detail ?? "Failed to create trip.");
-      }
-
-      const trip = await createRes.json();
 
       // Step 2 — generate AI recommendation
-      const generateRes = await fetch(`${API_URL}/api/v1/trips/${trip.id}/generate`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          destination,
-          days: Number(days),
-          budget: Number(budget),
-          travel_style: travelStyle,
-        }),
+      const generated = await generateRecommendation(trip.id, {
+        destination,
+        days: Number(days),
+        budget: Number(budget),
+        travel_style: travelStyle,
       });
 
-      if (!generateRes.ok) {
-        const err = await generateRes.json();
-        throw new Error(err.detail ?? "Failed to generate recommendation.");
-      }
-
-      const generated = await generateRes.json();
       onResult(generated.id, generated.ai_recommendation ?? "");
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
