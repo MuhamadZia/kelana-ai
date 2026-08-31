@@ -1,8 +1,10 @@
-# lebih baik ada version
-
-fastapi 
-uvicorn[standard]
-sqlalchemy # the ORM
-psycopg2-binary # the Postgres driver
-python-dotenv # load .env variables
+fastapi==0.141.1
+uvicorn[standard]==0.52.3
+sqlalchemy==2.0.52
+psycopg2-binary==2.9.12
+python-dotenv==1.2.2
 boto3==1.43.56
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+bcrypt==4.0.1
+email-validator==2.2.0
