@@ -13,6 +13,7 @@ export default function Navbar() {
         <nav className="hidden md:flex items-center gap-8">
           <Link href="/"        className="text-sm text-maroon/70 hover:text-maroon transition-colors">Home</Link>
           <Link href="/history" className="text-sm text-maroon/70 hover:text-maroon transition-colors">History</Link>
+          <Link href="/ask"     className="text-sm text-maroon/70 hover:text-maroon transition-colors">Travel Q&amp;A</Link>
           <a href="#"           className="text-sm text-maroon/70 hover:text-maroon transition-colors">Community</a>
           <a href="#"           className="text-sm text-maroon/70 hover:text-maroon transition-colors">Contacts</a>
         </nav>

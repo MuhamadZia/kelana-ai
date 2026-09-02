@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from database import init_db
 from routers.auth_router import router as auth_router
 from routers.trip_router import router as trip_router
+from routers.ask_router  import router as ask_router
 from services.trip_service import recommend_places, option_transportations
 
 import os
@@ -27,6 +28,7 @@ init_db()
 # ── Routers ────────────────────────────────────────────────────────────────────
 app.include_router(auth_router)
 app.include_router(trip_router)
+app.include_router(ask_router)
 
 
 # ── Utility routes ─────────────────────────────────────────────────────────────
