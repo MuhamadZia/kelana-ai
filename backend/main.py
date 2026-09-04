@@ -9,11 +9,19 @@ from services.trip_service import recommend_places, option_transportations
 
 import os
 
+from dotenv import load_dotenv
+load_dotenv()
+
 app = FastAPI(title="KelanaAI API")
+
+# Build allowed origins from env — supports comma-separated list
+# e.g. FRONTEND_URL=https://kelana-ai-delta.vercel.app,http://localhost:3000
+_frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000")
+ALLOWED_ORIGINS = [url.strip() for url in _frontend_url.split(",") if url.strip()]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[os.getenv("FRONTEND_URL")],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

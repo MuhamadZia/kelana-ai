@@ -51,16 +51,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setToken(access_token);
     const me = await getMe();
     setUser(me);
-    router.push("/");
-  }, [router]);
+    // Use full navigation so the browser includes the new cookie in the
+    // request before the proxy middleware checks it.
+    window.location.href = "/";
+  }, []);
 
   const register = useCallback(async (payload: RegisterPayload) => {
     const { access_token } = await apiRegister(payload);
     setToken(access_token);
     const me = await getMe();
     setUser(me);
-    router.push("/");
-  }, [router]);
+    window.location.href = "/";
+  }, []);
 
   const logout = useCallback(() => {
     removeToken();
