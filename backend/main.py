@@ -5,6 +5,7 @@ from database import init_db
 from routers.auth_router import router as auth_router
 from routers.trip_router import router as trip_router
 from routers.ask_router  import router as ask_router
+from routers.chat_router import router as chat_router
 from services.trip_service import recommend_places, option_transportations
 
 import os
@@ -28,8 +29,9 @@ app.add_middleware(
 )
 
 # Import models so create_all picks them up
-import models.user  # noqa: F401
-import models.trip  # noqa: F401
+import models.user          # noqa: F401
+import models.trip          # noqa: F401
+import models.conversation  # noqa: F401
 
 init_db()
 
@@ -37,6 +39,7 @@ init_db()
 app.include_router(auth_router)
 app.include_router(trip_router)
 app.include_router(ask_router)
+app.include_router(chat_router)
 
 
 # ── Utility routes ─────────────────────────────────────────────────────────────

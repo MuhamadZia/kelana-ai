@@ -14,6 +14,7 @@ export default function Navbar() {
           <Link href="/"        className="text-sm text-maroon/70 hover:text-maroon transition-colors">Home</Link>
           <Link href="/history" className="text-sm text-maroon/70 hover:text-maroon transition-colors">History</Link>
           <Link href="/ask"     className="text-sm text-maroon/70 hover:text-maroon transition-colors">Travel Q&amp;A</Link>
+          <Link href="/chat"    className="text-sm text-maroon/70 hover:text-maroon transition-colors">AI Chat</Link>
           <a href="#"           className="text-sm text-maroon/70 hover:text-maroon transition-colors">Community</a>
           <a href="#"           className="text-sm text-maroon/70 hover:text-maroon transition-colors">Contacts</a>
         </nav>

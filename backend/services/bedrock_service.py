@@ -182,3 +182,47 @@ def ask_knowledge_base(question: str) -> str:
 
     except Exception as exc:
         raise RuntimeError(f"Knowledge Base query failed: {exc}") from exc
+
+
+def chat_with_ai(history: list[dict]) -> str:
+    """
+    Send a multi-turn conversation history to Bedrock and return the reply.
+
+    Args:
+        history: List of {"role": "user"|"assistant", "content": str} dicts,
+                 ordered oldest → newest. The last entry must be role "user".
+
+    Returns:
+        The assistant's reply as a plain string.
+
+    Raises:
+        RuntimeError: If the Bedrock API call fails.
+    """
+    client = get_bedrock_client()
+
+    # Map history to Bedrock Converse message format
+    messages = [
+        {"role": msg["role"], "content": [{"text": msg["content"]}]}
+        for msg in history
+    ]
+
+    system_prompt = (
+        "You are KelanaAI, a travel assistant that ONLY answers travel-related questions. "
+        "You can help with: trip planning, destinations, itineraries, visa requirements, "
+        "local tips, accommodation, transportation, travel budgets, and cultural information. "
+        "If the user asks about anything unrelated to travel (e.g. coding, math, general knowledge, "
+        "politics, entertainment), politely decline and redirect them to ask a travel question instead. "
+        "Be friendly, concise, and enthusiastic about travel."
+    )
+
+    try:
+        response = client.converse(
+            modelId=MODEL_ID,
+            system=[{"text": system_prompt}],
+            messages=messages,
+        )
+        reply: str = response["output"]["message"]["content"][0]["text"]
+        return reply
+
+    except Exception as exc:
+        raise RuntimeError(f"Chat AI call failed: {exc}") from exc

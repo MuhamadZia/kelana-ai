@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 // Routes that require authentication
-const PROTECTED = ["/", "/history", "/trips", "/profile"];
+const PROTECTED = ["/", "/history", "/trips", "/profile", "/ask", "/chat"];
 // Routes only for guests (redirect to / if already logged in)
 const GUEST_ONLY = ["/login", "/register"];
 
